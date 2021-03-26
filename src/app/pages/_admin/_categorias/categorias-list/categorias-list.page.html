@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>{{titulo}}</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!refresh" (click)="loadstorage()" (click)="search = 'loading'">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+
+      <div *ngIf="refresh" class="spinner_refresh">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-row *ngIf="search == 'loading'" class="spinnerCenter">
+    <ion-spinner name="crescent"></ion-spinner>
+  </ion-row>
+
+
+  <ng-container *ngIf="search === 'ok'">
+
+    <ion-buttons class="search_desc">
+      <ion-searchbar placeholder="Buscar" [(ngModel)]="searchText" animated></ion-searchbar>
+    </ion-buttons>
+
+    <ion-item-divider color="light" class="divider"></ion-item-divider>
+
+    <br>
+
+    <div *ngFor="let mysale of mysales | pipeFilter: {nombre: searchText, tags: searchText}">
+
+      <!-- Con Categoria -->
+      <ion-card class="cupon_ticket_home" routerLink="/categorias-edit/{{mysale._id}}">
+
+        <ion-grid class="grid_card">
+          <ion-row class="ion-activatable pointer">
+            <ion-ripple-effect></ion-ripple-effect>
+
+            <ion-col size="12">
+              <ng-container *ngIf="mysale.status === 'true'">
+                <b class="b_text">{{mysale.nombre | uppercase}}</b>
+
+                <ion-text color="success" class="text_commerce_desc">
+                  Publicado&nbsp;
+                </ion-text>
+              </ng-container>
+
+              <ng-container *ngIf="mysale.status === 'false'">
+                <b class="b_text">{{mysale.nombre | uppercase}}</b>
+                
+                <ion-text color="danger" class="text_commerce_desc">
+                  No Publicado&nbsp;
+                </ion-text>
+              </ng-container>
+
+
+              <ion-item-divider class="divider"></ion-item-divider>
+
+              <span class="text_fecha_com">Creado:&nbsp;<b>{{ mysale.created | date: 'fullDate'  }},
+                  {{ mysale.created | date: 'h:mm a'  }}</b></span>
+              <span *ngIf="mysale.updated" class="text_fecha_com">
+                <ion-text color="success">Modificado:&nbsp;</ion-text>
+                <b>{{ mysale.updated | date: 'fullDate'  }},
+                  {{ mysale.updated | date: 'h:mm a'  }}</b>
+              </span>
+
+
+
+              <span *ngIf="mysale.usuario.nombre && mysale.usuario._id !== '5d9cbff44b725d06b82f1c57'"
+                class="text_name">{{ mysale.usuario.nombre }}</span>
+
+              <span *ngIf="mysale.usuario._id !== '5d9cbff44b725d06b82f1c57'" class="text_email">
+                <ion-icon *ngIf="mysale.usuario.fb === true" name="logo-facebook"></ion-icon>
+                <ion-icon *ngIf="mysale.usuario.role === false" name="logo-facebook"></ion-icon>
+                {{ mysale.usuario.email }}
+              </span>
+
+              <ion-buttons *ngIf="mysale.usuario._id === '5d9cbff44b725d06b82f1c57'">
+                <ion-icon name="person" color="tertiary"></ion-icon>&nbsp;
+
+                <ion-label color="tertiary">
+                  admin
+                </ion-label>
+              </ion-buttons>
+
+
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="search === 'no_results'">
+    <ion-label class="label_add">
+      <b>¡No hay información disponible en tu ciudad!</b>
+    </ion-label>
+  </ng-container>
+
+</ion-content>

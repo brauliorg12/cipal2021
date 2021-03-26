@@ -1,0 +1,46 @@
+npm i
+
+ionic build
+
+cordova-res android --skip-config --copy
+
+
+ionic capacitor build android --prod 
+
+npx cap sync
+
+
+para arreglar el trafico http
+
+app/src/main/Androidmanifest.xml
+android:usesCleartextTraffic="true"
+
+ionic capacitor build android --prod 
+
+
+ionic serve --port 80
+
+-para splash e icono
+https://capacitorjs.com/docs/guides/splash-screens-and-icons
+
+npm install -g cordova-res
+cordova-res android --skip-config --copy
+
+    <!-- Permissions -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Camera, Photos, input file -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Geolocation API -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" />
+    <!-- Network API -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Navigator.getUserMedia -->
+    <!-- Video -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Audio -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>

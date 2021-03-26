@@ -1,0 +1,18 @@
+{
+  "appId": "io.app.cipal",
+  "appName": "CIPAL",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1000,
+      "showSpinner": true,
+      "androidSplashResourceName": "splash",
+      "spinnerColor": "#00416b",
+      "splashFullScreen": true,
+      "splashImmersive": true
+    }
+  },
+  "cordova": {}
+}

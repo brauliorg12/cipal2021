@@ -1,0 +1,152 @@
+<ion-header class="ion-text-center header_home">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      &nbsp;
+      <ion-back-button mode="md" type="button" color="light" icon="arrow-back" defaultHref="/">
+      </ion-back-button>
+
+      <ion-title color="light">Chat </ion-title>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="status === 'ok' || status === 'cero'" slot="end" class="user-info">
+      <div class="header_padding">
+        <div class="header-mood">
+          Estás chateando con:
+        </div>
+        <div class="header-name">
+          {{usuario_recibe.nombre}}
+        </div>
+      </div>
+
+      <ion-avatar slot="end">
+        <img src="assets/img/av-1.png">
+      </ion-avatar>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #IonContent>
+
+  <ng-container *ngIf="status === 'cero'">
+    <ion-label class="label_add center" color="medium">
+      <b>No tienes mensajes con {{usuario_recibe.nombre}} aún.</b>
+    </ion-label>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'error'">
+    <ion-label class="label_add center" color="medium">
+      <b>Error reintentar!</b>
+    </ion-label>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'ok'">
+    <ion-list class="max-width">
+      <div *ngFor="let chat of msgList; let i = index; ">
+
+        <ion-item-sliding #itemSliding *ngIf="chat.usuario_cre !== usuario._id">
+          <ion-item class="chat-item">
+            <ion-row class="chat-row" *ngIf="chat.usuario_cre !== usuario._id">
+              <ion-col class="right ion-no-padding">
+                <div class="imageAvatarRight animated superfast" [ngClass]="{'slideInLeft':(i==(msgList.length-1))}">
+                  <ion-label color="light">
+                    <div class="chatDiv">
+                      <p class="text-wrap" padding>{{chat.mensaje}}</p>
+                    </div>
+                  </ion-label>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-row *ngIf="((msgList[i+1] && msgList[i+1].usuario_cre != chat.usuario_cre)|| !msgList[i+1])">
+            <ion-col size="12" class="col_fecha_izquierda">
+              <div class="timer-right">
+                <p class="timer-rightP">{{chat.fecha | date: ' d/M/yy h:mm'}}</p>
+                <ion-icon *ngIf="chat.visto" name="done-all" class="first-tick">
+                </ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-item-options (ionSwipe)="closeTime(itemSliding)" side="end">
+            <ion-item-option
+              [ngClass]="((msgList[i+1] && msgList[i+1].usuario_cre != chat.usuario_cre)|| !msgList[i+1]) ? '':'time-center'">
+              <ion-text>{{chat.fecha}}</ion-text>
+            </ion-item-option>
+          </ion-item-options>
+
+        </ion-item-sliding>
+        <ion-item-sliding #itemSliding2 *ngIf="chat.usuario_cre === usuario._id">
+          <ion-item class="chat-item">
+            <ion-row class="chat-row">
+              <ion-col class="left ion-no-padding" size="12">
+                <div class="imageAvatarLeft animated superfast" [ngClass]="{'slideInRight':(i==(msgList.length-1))}">
+                  <ion-label color="light">
+                    <div class="chatDiv">
+                      <p class="text-wrap" padding>{{chat.mensaje}}</p>
+                    </div>
+                  </ion-label>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-row *ngIf="((msgList[i+1] && msgList[i+1].usuario != chat.usuario)|| !msgList[i+1])">
+            <ion-col size="12" class="col_fecha_derecha">
+            </ion-col>
+          </ion-row>
+          <ion-item-options (ionSwipe)="closeTime(itemSliding2)" side="end">
+            <ion-item-option
+              [ngClass]="((msgList[i+1] && msgList[i+1].usuario != chat.usuario)|| !msgList[i+1]) ? '':'time-center'">
+              <ion-text>{{chat.fecha | date: ' d/M/yy h:mm'}}</ion-text>
+            </ion-item-option>
+          </ion-item-options>
+
+        </ion-item-sliding>
+
+
+
+        <ion-row class="thin-gap" *ngIf="((msgList[i+1] && msgList[i+1].usuario == chat.usuario))"></ion-row>
+
+
+      </div>
+
+      <!-- <ion-row class="chat-row" padding-bottom >
+      <ion-col class="loading-col ion-no-padding">
+        <div class="imageAvatarRight">
+          <ion-label>
+            <div class="chatDivLoader">
+              <ion-spinner name="dots" color="dark"></ion-spinner>
+
+              <div class="corner-parent-right">
+                <div class="corner-child-right">
+
+                </div>
+              </div>
+            </div>
+          </ion-label>
+        </div>
+      </ion-col>
+    </ion-row> -->
+    </ion-list>
+  </ng-container>
+
+</ion-content>
+
+<ion-footer translucent *ngIf="status === 'ok' || status === 'cero'">
+  <ion-toolbar>
+    <ion-item>
+      <ion-input type="text" placeholder="Escriba su mensaje..." [(ngModel)]="userInput"
+        (keypress)="userTyping($event)"></ion-input>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="prepareMsg()" (mousedown)="something($event)" color="primary" [disabled]="">
+          <ion-icon name="send" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

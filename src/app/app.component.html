@@ -1,0 +1,90 @@
+<ion-app>
+  <ion-menu side="end" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú</ion-title>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="close()">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content>
+
+      <ion-list>
+        <ion-item routerLink="/inicio" (click)="close()" routerLinkActive="active">
+          <ion-icon name="home-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Inicio</ion-label>
+        </ion-item>
+
+        <ion-item disabled>
+          <ion-icon name="podium-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Expositores</ion-label>
+        </ion-item>
+
+        <ion-item disabled (click)="close()">
+          <ion-icon name="people-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Conferencistas</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/networking" (click)="close()" routerLinkActive="active">
+          <ion-icon name="chatbubbles-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Networking</ion-label>
+        </ion-item>
+
+        <ion-item disabled>
+          <ion-icon name="map-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Plano del Evento</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/cuenta" (click)="close()" routerLinkActive="active" lines="none">
+          <ion-icon name="cog-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Mi Cuenta</ion-label>
+        </ion-item>
+
+      </ion-list>
+
+      <br><br>
+      <div class="ion-text-center grid">
+        <ion-label color="primary" class="label_redes">Nuestras redes:</ion-label>
+
+        <div class="flex">
+          <ion-buttons>
+            <ion-button class="icon_insta">
+              <ion-icon name="logo-linkedin" class="icon_somos" color="primary" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-buttons>
+            <ion-button class="icon_insta">
+              <ion-icon name="logo-facebook" class="icon_somos" color="primary" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-buttons>
+            <ion-button class="icon_insta">
+              <ion-icon name="logo-youtube" class="icon_somos" color="primary" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-buttons>
+            <ion-button class="icon_facebook">
+              <ion-icon name="logo-instagram" class="icon_somos" color="primary" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+
+    </ion-content>
+
+    <ion-footer *ngIf="version" class="ion-text-center">
+      <ion-text class="version" color="medium"> version: {{version}}</ion-text>
+    </ion-footer>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

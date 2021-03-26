@@ -1,0 +1,24 @@
+.active {
+  --background: #dadada70;
+
+  ion-label {
+    font-weight: bold;
+  }
+}
+
+.label_redes {
+  font-size: 14px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.version {
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+}

@@ -1,0 +1,92 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Guardados</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="loadPage(event, 1)" (click)="status = 'loading'" [disabled]="status === 'loading'">
+        <ion-icon name="refresh" slot="icon-only" color="light"></ion-icon>
+      </ion-button>
+
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+  <!-- Segment -->
+  <ion-segment value="all" #segment>
+    <ion-segment-button value="all">
+      <ion-label><b>Favoritos</b>&nbsp;<ion-badge class="badge_offer">
+
+        </ion-badge>
+      </ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="offers">
+      <ion-label><b>Charlas</b>&nbsp;<ion-badge class="badge_offer_r">
+
+        </ion-badge>
+      </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'error'">
+    <ion-label class="label_add center" color="medium">
+      <b>Error reintentar!</b>
+    </ion-label>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'cero'">
+    <ion-label class="label_add center" color="medium">
+      <b>No hay favoritos</b>
+    </ion-label>
+  </ng-container>
+
+
+
+  <ng-container fixed *ngIf="status === 'ok'">
+
+    <ion-item-group reorder="true">
+      <ion-item-sliding *ngFor="let person of list_net">
+
+        <ion-item *ngIf="person._id !== usuario._id">
+          <ion-avatar item-left class="pointer" routerLink="/perfil/{{person._id}}">
+            <ion-img [src]="'https://res.cloudinary.com/cubanova/image/upload/v1608622656/cfoltteyfvmr0geze5c5.png'"
+              class="img_comm_avatar">
+            </ion-img>
+          </ion-avatar>&nbsp;&nbsp;
+          <ion-label class="pointer capitalize" routerLink="/perfil/{{person._id}}">{{ person.nombre}}</ion-label>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="goToChat(person._id)" color="primary">
+              <ion-icon name="chatbubbles-outline" class="only_coupons pointer" color="primary" slot="icon-only">
+              </ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+        </ion-item>
+
+
+        <ion-item-options side="end">
+          <ion-buttons>
+            <ion-button *ngIf="person.email" slot="end" color="success">
+              <ion-icon name="logo-whatsapp" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+
+  </ng-container>
+
+</ion-content>

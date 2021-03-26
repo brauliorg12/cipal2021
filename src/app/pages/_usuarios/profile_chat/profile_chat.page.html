@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content *ngIf="status === 'loading'">
+  <ion-row class="center ion-text-center">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+  </ion-row>
+</ion-content>
+
+
+<ion-content *ngIf="status === 'ok'">
+  <br><br>
+  <ion-row class="top-2">
+
+    <ion-col size="12" class="ion-text-center">
+      <ion-icon name="person" class="icon_profile" color="primary"></ion-icon>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+
+      <ion-list>
+
+        <ion-item lines="inset">
+          <ion-label position="floating" color="primary" class="text_floating">Nombre:</ion-label>
+          <ion-input name="nombre" type="text" [(ngModel)]="user.nombre" required readonly class="input_perfil"></ion-input>
+        </ion-item>
+
+        <ion-item lines="inset">
+          <ion-label position="floating" color="primary" class="text_floating">Email</ion-label>
+          <ion-input name="email" type="email" [(ngModel)]="user.email" class="input_perfil" required readonly></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" routerLink="/chat/{{user._id}}">
+          <ion-icon name="chatbubbles-outline" class="icon_fb"></ion-icon>&nbsp;&nbsp;
+          <ion-label>
+            <h2>Enviar Mensaje</h2>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

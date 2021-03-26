@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab3"></ion-back-button>
+      <ion-title>Categorías</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="load()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+
+  <!------------------------------------------------------  Comercios  ---------------------------------------------------------->
+  <br>
+
+  <ion-card>
+    <ion-item class="ion-activatable" lines="inset" (click)="goto('comercio')">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      <ion-icon src="/assets/icon/commerces_guie.svg" color="secondary" slot="start" class="icon_start_tab3"></ion-icon>&nbsp;
+      <ion-label>
+        <h3><b>Comercios</b>&nbsp;
+        <ion-badge *ngIf="search_com === 'ok'" color="medium" class="badge_banners">{{total_com}}</ion-badge>
+        <ion-spinner *ngIf="search_com === 'loading'" color="medium" class="badge_banners details_tab3"></ion-spinner>
+      </h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-activatable" lines="inset" (click)="goto('profesional')">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      <ion-icon src="/assets/icon/doctor.svg" color="secondary" slot="start" class="icon_start_tab3"></ion-icon>&nbsp;
+      <ion-label>
+        <h3><b>Profesionales</b>&nbsp;
+        <ion-badge *ngIf="search_prof === 'ok'" color="medium" class="badge_banners">{{total_prof}}</ion-badge>
+        <ion-spinner *ngIf="search_prof === 'loading'" color="medium" class="badge_banners details_tab3"></ion-spinner>
+      </h3>
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item class="ion-activatable" lines="inset" (click)="goto('servicio')">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      <ion-icon src="/assets/icon/support.svg" color="secondary" slot="start" class="icon_start_tab3"></ion-icon>&nbsp;
+      <ion-label>
+        <h3><b>Servicios</b>&nbsp;
+        <ion-badge *ngIf="search_serv === 'ok'" color="medium" class="badge_banners">{{total_serv}}</ion-badge>
+        <ion-spinner *ngIf="search_serv === 'loading'" color="medium" class="badge_banners details_tab3"></ion-spinner>
+      </h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-activatable" lines="inset" routerLink="/categoria-add">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      <ion-icon name="add" color="tertiary" slot="start" class="icon_start_tab3"></ion-icon>&nbsp;
+      <ion-label>
+        <h3><b>Crear Nueva</b></h3>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

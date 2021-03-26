@@ -1,0 +1,61 @@
+.list_no_lines {
+  font-size: 14px;
+  padding-left: 1rem;
+  display: block;
+  margin-top: -0.5rem;
+}
+
+.img_normal {
+  margin-top: 1rem;
+  max-height: 120px;
+  max-width: 120px;
+  min-height: 120px;
+  min-width: 120px;
+}
+
+ion-col {
+  padding: 0px !important;
+}
+
+ion-card {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.text_floating {
+  font-size: 20px !important;
+  padding-bottom: 1rem;
+}
+
+.col_file {
+  margin-top: 20px;
+}
+.col_img {
+  margin-top: -40px;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.color_col {
+  background-color: #ffffff;
+  margin: 2px;
+  max-width: 99% !important;
+}
+
+.error {
+  font-size: 12px;
+  padding-top: 0.2rem;
+  display: flex;
+}
+.icon_error {
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.btn_user {
+  margin-top: 15px;
+}
+
+.icon_loc {
+  vertical-align: middle;
+}

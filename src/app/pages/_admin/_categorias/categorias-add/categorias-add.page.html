@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Nueva categoría</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+
+  <form [formGroup]="catsForm" novalidate>
+    <ion-grid>
+      <ion-row>
+
+        <!--------------------------------------------------------------------------------------------------------------->
+        <ion-col size="12" class="card_form">
+          <ion-card>
+            <ion-item lines="inset">
+              <ion-label>
+                <ion-icon class="icon_addi" name="globe" color="tertiary"></ion-icon>Publicada
+              </ion-label>
+              <ion-toggle formControlName="status" (ionChange)="statusCommerce()"></ion-toggle>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label position="floating" color="tertiary" class="text_floating">Seleccione un tipo:</ion-label>
+              <ion-select formControlName="tipo" cancelText="Cancelar" [interfaceOptions]="positionAlertOptions"
+                placeholder="elejí uno">
+                <ion-select-option *ngFor="let item of cats" value="{{item}}">
+                  {{item | uppercase}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" class="card_form">
+          <ion-card>
+            <ion-item lines="inset">
+              <ion-label position="floating" color="tertiary" class="text_floating font_seis">Nombre:
+              </ion-label>
+              <ion-input type="text" formControlName="nombre" autocapitalize="on" placeholder="nombre de la categoría">
+              </ion-input>
+            </ion-item>
+
+            <ion-item lines="inset">
+              <ion-label position="floating" color="tertiary" class="text_floating font_seis">Palabras clave:
+              </ion-label>
+              <ion-textarea type="text" formControlName="tags" autocapitalize="off" autoGrow="true"
+                placeholder="palabras clave">
+              </ion-textarea>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label>
+                <ion-icon class="icon_addi" name="person" color="tertiary"></ion-icon>¿Solo para Admins?:
+              </ion-label>
+              <ion-toggle formControlName="isadmin" (ionChange)="btnCommerce()"></ion-toggle>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+
+
+      </ion-row>
+    </ion-grid>
+
+  </form>
+</ion-content>
+
+<!--------------------------------------------------------------------------------------------------------------->
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="12">
+      <ion-button expand="block" shape="round" (click)="createBanner()" color="tertiary" [disabled]="!catsForm.valid">
+        <b>Publicar</b>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,122 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>Mi Cuenta</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+
+  <ion-card *ngIf="status !== 'loading'">
+    <ion-list>
+
+      <ng-container *ngIf="status === 'login'">
+      <ion-item class="ion-activatable" lines="inset" routerLink="/profile">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="person-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Mi Perfil</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="ion-activatable" lines="inset" routerLink="/qr">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon src="assets/icon/codigo-qr.svg" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Mi QR</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="ion-activatable" lines="none" routerLink="/favs">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="bookmarks-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Guardados</h2>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+
+      <ion-item *ngIf="status === 'nologin'" class="ion-activatable" lines="none" routerLink="/login">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="log-in-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Ingresar</h2>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+  </ion-card>
+
+  <!----------------------------------------------  ADMIN  -------------------------------------------------------->
+  <ion-card *ngIf="role === 'admin'">
+    <ion-list-header>Admin:</ion-list-header>
+    <ion-list>
+
+      <ion-item class="ion-activatable" lines="inset" routerLink="/expositores-list">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="podium-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Expositores</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="ion-activatable" lines="inset" routerLink="/conferencistas-list">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="people-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Conferencistas</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item disabled class="ion-activatable" lines="inset" routerLink="/auditorios-list">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="school-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Auditorios</h2>
+        </ion-label>
+      </ion-item>
+
+
+      <ion-item disabled class="ion-activatable" lines="inset" routerLink="/categorias-list">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="apps-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Categorías</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item disabled class="ion-activatable" lines="none">
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        <ion-icon name="map-outline" slot="start" class="icon_start_tab3" color="primary"></ion-icon>
+        &nbsp;&nbsp;
+        <ion-label>
+          <h2>Plano</h2>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
+
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+</ion-content>

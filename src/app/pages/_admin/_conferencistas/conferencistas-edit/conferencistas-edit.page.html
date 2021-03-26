@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/conferencistas-list"></ion-back-button>
+      <ion-title>Editando Conferencista</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="light">
+
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'ok'">
+    <form [formGroup]="dataForm" novalidate>
+
+      <ion-grid>
+        <ion-row>
+
+          <!---------------------------------------------- SLIDE TITULO Y DESCRIPCION -------------------------------------------->
+
+          <ion-col size="12" class="card_form">
+
+            <ion-card>
+              <ion-list no-lines>
+                <ion-label color="primary" class="list_no_lines"><b>Nombre:
+                    <ion-text *ngIf="!dataForm.get('nombre').valid" color="danger">*</ion-text>
+                    <ion-icon *ngIf="dataForm.get('nombre').valid" name="checkmark-circle" color="success"
+                      class="icon_check"></ion-icon>
+                  </b>
+                </ion-label>
+              </ion-list>
+
+              <ion-item>
+                <ion-input #input_t type="text" formControlName="nombre" autocapitalize="on" autoGrow="true"
+                  maxlength="55"></ion-input>
+              </ion-item>
+
+
+
+              <ion-text
+                *ngIf="dataForm.get('nombre').errors && (dataForm.get('nombre').dirty || dataForm.get('nombre').touched)"
+                class="error">&nbsp;
+                <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mínimo 5 caracteres
+              </ion-text>
+            </ion-card>
+
+
+            <!------ DESCRIPCION ------->
+            <ion-card>
+              <ion-list no-lines>
+                <ion-label color="primary" class="list_no_lines"><b>Descripción:
+                    <ion-text *ngIf="!dataForm.get('descripcion').valid" color="danger">*</ion-text>
+                    <ion-icon *ngIf="dataForm.get('descripcion').valid" name="checkmark-circle" color="success"
+                      class="icon_check"></ion-icon>
+                  </b>
+                </ion-label>
+              </ion-list>
+
+              <ion-item>
+                <ion-textarea #input_desc type="text" formControlName="descripcion" autocapitalize="on" autoGrow="true"
+                  maxlength="2000" class="tare_des"></ion-textarea>
+              </ion-item>
+
+
+
+              <ion-text
+                *ngIf="dataForm.get('descripcion').errors && (dataForm.get('descripcion').dirty || dataForm.get('descripcion').touched)"
+                class="error">&nbsp;
+                <ion-icon name="alert" class="icon_error"></ion-icon>&nbsp;Mínimo 10 caracteres
+              </ion-text>
+            </ion-card>
+
+            <!-------------------------------------------  SLIDE FOTO Y TAGS  ------------------------------------------>
+
+            <span class="card_desc_img"></span>
+
+            <ion-card>
+              <ion-list no-lines>
+                <ion-label color="primary" class="list_no_lines"><b>Logo:</b>
+                  <ion-text *ngIf="!dataForm.get('img').valid" color="danger" class="text_cat"> *
+                  </ion-text>
+                  <ion-icon *ngIf="dataForm.get('img').valid" name="checkmark-circle" color="success"
+                    class="icon_check">
+                  </ion-icon>
+                </ion-label>
+              </ion-list>
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+
+                  <ion-col class="col_file ion-text-center">
+
+                    <input type="file" hidden class="d-none" (change)="onPhotoSelected($event)" #photoInput>
+                    <ion-button shape="round" (click)="photoInput.click()">
+                      <ion-icon slot="start" name="image"></ion-icon>
+                      Cambiar
+                    </ion-button>
+                  </ion-col>
+
+                  <ion-col class="col_file ion-text-center">
+                    <ion-img src="{{photoSelected}}" class="img_banner"></ion-img>
+                  </ion-col>
+                </ion-row>
+
+              </ion-grid>
+
+              <div *ngIf="!photoSelected" class="div_br"></div>
+            </ion-card>
+
+
+
+            <!------ Email ------->
+            <ion-card>
+              <ion-list no-lines>
+                <ion-label color="primary" class="list_no_lines"><b>Email: </b>
+                </ion-label>
+              </ion-list>
+
+
+              <ion-item>
+                <ion-input name="email" type="email" autocomplete="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="email"></ion-input>
+              </ion-item>
+
+            </ion-card>
+
+
+            <!------ TELEFONO ------->
+            <ion-card>
+              <ion-list no-lines>
+                <ion-label color="primary" class="list_no_lines"><b>Número de Teléfono: </b>
+                </ion-label>
+              </ion-list>
+
+              <ion-item>
+                <ion-input type="text" maxlength="15" formControlName="telefono">
+                </ion-input>
+              </ion-item>
+            </ion-card>
+
+            <br><br>
+
+
+            <ion-button shape="round" size="large" expand="block" class="btn_pub" (click)="update()"
+              [disabled]="!dataForm.valid">
+              <div class="ion-text-center pointer">
+                <ion-text class="icon_footer_t_p" color="primary"><b>Modificar</b></ion-text>
+              </div>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ng-container>
+
+</ion-content>

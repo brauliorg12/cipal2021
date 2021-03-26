@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-no-padding">
+      <img src="assets/icon/logo.png" alt="" class="logo">
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ng-container *ngIf="login === 'login'">
+        <ion-button routerLink="/favs">
+          <ion-icon slot="icon-only" name="bookmarks"></ion-icon>
+        </ion-button>
+
+        <ion-button routerLink="/notifications">
+          <ion-icon slot="icon-only" name="notifications"></ion-icon>
+        </ion-button>
+
+        <ion-button routerLink="/networking">
+          <ion-icon slot="icon-only" name="chatbubbles"></ion-icon>
+        </ion-button>
+
+        <ion-button routerLink="/qr">
+          <ion-icon slot="icon-only" src="assets/icon/codigo-qr.svg"></ion-icon>
+        </ion-button>
+      </ng-container>
+
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)" overflow-scroll="true">
+
+  <!-- <ion-refresher slot="fixed" pullFactor="0.5" pullMin="80" pullMax="300" (ionRefresh)="recargarms($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher> -->
+
+  <ion-slides pager="true" #slideshome [options]="slideManyOpts" class="slides_home pointer">
+    <ion-slide>
+      <ion-card class="slide_image_home">
+        <img src="assets/img/splash.png" class="obj_fit" />
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card class="slide_image_home">
+        <img [src]="'https://www.cipal.com.ar/sistema/uploads/259/entradas/18092019-dji_20190918_103829--1-.jpg'"
+          class="obj_fit" />
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card class="slide_image_home">
+        <img [src]="'https://www.cipal.com.ar/sistema/uploads/259/entradas/18092019-img_20190918_122508178_hdr--1-.jpg'"
+          class="obj_fit" />
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <!--<ng-container *ngIf="status === 'loading' && status_2 === 'loading'">-->
+  <ng-container *ngIf="status === 'loading'">
+    <ion-row class="center">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </ion-row>
+  </ng-container>
+
+  <!--<ng-container *ngIf="status === 'cero' && status_2 === 'ok'">-->
+  <ng-container *ngIf="status === 'cero'">
+    <div class="ion-text-left ion-padding">
+      <ion-label class="label_add center" color="medium">
+        <b>No hay Publicaciones disponibles</b>
+      </ion-label>
+    </div>
+  </ng-container>
+
+</ion-content>
